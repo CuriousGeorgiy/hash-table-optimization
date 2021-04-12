@@ -111,7 +111,7 @@ Let's examine the performance and assembly of operator== for hash table entries:
 
 This disassembly was not sufficient, so I used the [Compiler Explorer](https://godbolt.org) tool to reproduce the disassembly:
 ```asm
-      mov     rax, qword ptr [rdi]
+        mov     rax, qword ptr [rdi]
         test    rax, rax
         je      .LBB1_4
         mov     rcx, qword ptr [rsi]
