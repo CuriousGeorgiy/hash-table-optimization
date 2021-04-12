@@ -61,7 +61,7 @@ here would be the remaining arbitrary length of the strings, which does not perm
 
 ![v0 __strcmp_avx2](docs/assets/v0/v0__strcmp_avx2.png)
 
-This is the complete source code which I discovered in libc sources:
+This is the complete source code which I discovered in libc sources (due to lack of debug symbols for libc):
 ```asm
       movl        %edi, %eax
       xorl        %edx, %edx
@@ -95,7 +95,7 @@ static const std::size_t StringSize = CHAR_BIT * sizeof(unsigned long long);
 typedef char String[StringSize];
 ```
 
-This allows us to calculate hashes in precisely one (!) instruction cycle by using the [_mm_crc32_u64](https://software.intel.com/sites/landingpage/IntrinsicsGuide/#text=crc32) intrinsic. Also, now we can compare two strings by just casting them to 64-bit integers.
+This allows us to calculate hashes in precisely one (!) instruction cycle by using the [_mm_crc32_u64](https://software.intel.com/sites/landingpage/IntrinsicsGuide/#text=crc32) intrinsic. Also, now we can compare two strings just by casting them to 64-bit integers.
 
 Supprisingly, the results were opposite — I received a performance degrade:
 
