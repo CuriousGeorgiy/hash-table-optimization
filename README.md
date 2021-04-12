@@ -186,9 +186,11 @@ reasonable interpretation.
 The performance of the final version compared to that of the initial one is shown below.
 
 Elapsed time:
+
 ![v3-v0 elapsed time](docs/assets/res/res_elapsed_time.png)
 
 CPU time difference:
+
 ![v3-v0 cpu time difference](docs/assets/res/res_cpu_time_diff.png)
 
 The Dedinsky number for the resulting optimization: 1250.
