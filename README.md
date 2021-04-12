@@ -6,7 +6,7 @@ The resulting performance gained with the improvements observed below is 125% co
 ## Table of contents
 * [Background](#background)
 * [Abstract](#abstract)
-* [Version 0](#verison-0)
+* [Version 0](#version-0)
   1. [elfHash](#1-elfhash)
   2. [operator== for hash table entires](#2-operator-for-hash-table-entries)
   3. [__strcmp_AVX2](#3-__strcmp_avx2)
@@ -82,12 +82,12 @@ This is the complete source code which I discovered in libc sources:
 ```
 Apparently, libc has its own intrinsic for string comparison which heavily uses AVX2.
 
-## 4. findNodeByValue for doubly linked lists
+### 4. findNodeByValue for doubly linked lists
 
 ![v0 findNodeByValue](docs/assets/v0/v0_find_node_by_value.png)
 This is a straightforward implementation of linear linked list search: nothing really we can do to optimize this better than what the compiler does for us.
 
-# Version 1
+## [Version 1](v1)
 Summing up the results from the initial version and analysing our dataset, we naturally come up with the idea to restrict the size of the strings we hash to a size that fits well for the optimizations we keep in mind, thus defining the following constraint on our input data:
 
 ```C++
@@ -126,7 +126,7 @@ This disassembly was not sufficient, so I used the [Compiler Explorer](https://g
         ret
 ```
 
-## Version 2
+## [Version 2](v2)
 Obviously, I decided to revert the implementation of the operator== for hash table entries to the inital one to see if it removes the resulted performance
 bottleneck:
 
@@ -138,7 +138,7 @@ And it actually did... Thinking of where the problem lies and how could string c
 more efficient than explicit number comparison, I thought of how arbitrary data can be tested on equality based on its binary representation: the bitwise XOR 
 appeared to me to be the key, even though I did not think that, clearly, the equality operator must be already by design equivalent to biwise XOR.
 
-## Version 3
+## [Version 3](v3)
 Anyways, I changed the equality operator accordingly:
 
 ```C++
