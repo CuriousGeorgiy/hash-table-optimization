@@ -15,8 +15,8 @@ public:
         friend bool operator==(const Entry &a, const Entry &b)
         {
             return ((a.key != nullptr) && (b.key != nullptr)) &&
-            (*reinterpret_cast<const unsigned long long *>(*a.key) ^
-             *reinterpret_cast<const unsigned long long *>(*b.key));
+            !((*reinterpret_cast<const unsigned long long *>(*a.key) ^
+              *reinterpret_cast<const unsigned long long *>(*b.key)));
         }
 
         const String *key;
