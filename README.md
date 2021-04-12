@@ -185,7 +185,7 @@ reasonable interpretation.
 ## Conclusion
 The performance of the final version compared to that of the initial one is shown below.
 
-Elapsed time:
+Elapsed time difference:
 
 ![v3-v0 elapsed time](docs/assets/res/res_elapsed_time.png)
 
